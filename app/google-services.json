@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "694544610453",
+    "firebase_url": "https://meet-app-interview.firebaseio.com",
+    "project_id": "meet-app-interview",
+    "storage_bucket": "meet-app-interview.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694544610453:android:a714afa5c0164978",
+        "android_client_info": {
+          "package_name": "kinect.pro.meetingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694544610453-jgdvg9ko8g4gg1e47vsv3q23vbc7mbcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4pE8xqyc_8MLyFkIylNltPWQ35XorldU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
