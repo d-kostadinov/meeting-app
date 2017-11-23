@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kinect.pro.meetingapp.activity.CreateMeetingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/size_15"
+            android:text="@string/create_meeting"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_20" />
+
+        <EditText
+            android:id="@+id/etMeetingTopic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20"
+            android:hint="@string/meeting_topic"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_13"
+            android:theme="@style/MyEditTextTheme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <MultiAutoCompleteTextView
+                android:id="@+id/etContacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20"
+                android:hint="@string/add_contacts"
+                android:inputType="text"
+                android:digits="0123456789+, "
+                android:textSize="@dimen/text_size_13"
+                android:theme="@style/MyEditTextTheme" />
+
+            <!--android:drawableEnd="@drawable/ic_perm_contact_calendar_black_24dp"-->
+            <ImageButton
+                android:id="@+id/peekContacts"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="-70dp"
+                style="?android:buttonBarButtonStyle"
+                android:paddingBottom="5dp"
+                android:src="@drawable/ic_perm_contact_calendar_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                android:focusable="true"
+                android:hint="@string/start_date"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/text_size_13"
+                android:theme="@style/MyEditTextTheme"
+                tools:ignore="TextFields" />
+
+            <EditText
+                android:id="@+id/etDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20"
+                android:layout_weight="1"
+                android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                android:focusable="true"
+                android:hint="@string/stop_date"
+                android:textIsSelectable="true"
+                android:textSize="@dimen/text_size_13"
+                android:theme="@style/MyEditTextTheme" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/size_20"
+            android:layout_marginStart="@dimen/size_20"
+            android:drawableEnd="@drawable/ic_location_on_black_24dp"
+            android:focusable="true"
+            android:hint="@string/location"
+            android:textIsSelectable="true"
+            android:textSize="@dimen/text_size_13"
+            android:theme="@style/MyEditTextTheme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etReminder"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_20"
+            android:drawableEnd="@drawable/ic_notifications_black_24dp"
+            android:inputType="numberDecimal"
+            android:text="@string/min30"
+            android:textSize="@dimen/text_size_13"
+            android:theme="@style/MyEditTextTheme" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_20"
+                android:textColor="?android:textColorHint"
+                android:text="@string/minutes_before"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCreateMeeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/size_25"
+                android:background="@drawable/rounded_button"
+                android:padding="@dimen/size_15"
+                android:text="@string/create_meeting"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/size_20"
+                android:background="@null"
+                android:text="@string/cancel" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

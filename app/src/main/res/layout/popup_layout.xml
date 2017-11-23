@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_25"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/colorDodgerblue"
+        android:textSize="@dimen/text_size_50" />
+
+    <TextView
+        android:id="@+id/tvTitleMeeting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAppName"
+        android:layout_margin="@dimen/size_20"
+        android:gravity="center_horizontal"
+        android:text="@string/reminder"
+        android:textSize="@dimen/text_size_20" />
+
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swipe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:button_background="@drawable/shape_buttons"
+        app:button_bottom_padding="20dp"
+        app:button_image_disabled="@drawable/ic_lock_open_black_24dp"
+        app:button_image_enabled="@drawable/ic_lock_outline_black_24dp"
+        app:button_image_height="60dp"
+        app:button_image_width="100dp"
+        app:button_left_padding="20dp"
+        app:button_right_padding="20dp"
+        app:button_top_padding="20dp"
+        app:has_activate_state="true"
+        app:initial_state="disabled"
+        android:layout_margin="@dimen/size_20"
+        app:inner_text="@string/swipe"
+        app:inner_text_background="@drawable/shape_round"
+        app:inner_text_bottom_padding="18dp"
+        app:inner_text_color="@color/colorDodgerblue"
+        app:inner_text_size="16sp"
+        app:inner_text_top_padding="18dp" />
+</RelativeLayout>

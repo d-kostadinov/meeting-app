@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kinect.pro.meetingapp.activity.LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_40"
+        android:textColor="@color/colorDodgerblue"
+        android:layout_margin="@dimen/size_25"/>
+
+    <EditText
+        android:id="@+id/etNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:theme="@style/MyEditTextTheme"
+        android:layout_margin="@dimen/size_20"
+        android:hint="@string/enter_phone_number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_20"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorBlack"
+        android:text="@string/clicking_registration_you_accept"/>
+
+    <TextView
+        android:id="@+id/terms_and_cond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/colorBlack"
+        android:layout_marginBottom="@dimen/size_200"
+        android:text="@string/terms_and_conditions"/>
+
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
+        android:text="@string/registration"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center_horizontal"
+        android:padding="@dimen/size_15"/>
+
+
+</LinearLayout>

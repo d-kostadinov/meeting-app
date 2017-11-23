@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Meeting App</string>
+
+    <string name="enter_phone_number">Enter your phone number</string>
+    <string name="registration">Registration</string>
+    <string name="validation_Code">Validation Code</string>
+    <string name="submit">Submit</string>
+    <string name="create_meeting">Create meeting</string>
+    <string name="your_meeting">Your meeting</string>
+    <string name="meeting_topic">Meeting topic</string>
+    <string name="add_contacts">Enter contacts separated by commas and spaces</string>
+    <string name="date_time">Date &amp; Time</string>
+    <string name="pick_time">Pick time</string>
+    <string name="duration">Duration</string>
+    <string name="location">Location</string>
+    <string name="reminder">Reminder</string>
+    <string name="cancel">Cancel</string>
+    <string name="start_time">Start time</string>
+    <string name="stop_time">Stop time</string>
+    <string name="confirmed">Confirm</string>
+    <string name="canceled">Cancel</string>
+    <string name="zero">0</string>
+    <string name="start_date">Start date</string>
+    <string name="stop_date">Stop date</string>
+    <string name="OK">OK</string>
+    <string name="close">close</string>
+    <string name="minutes_before">(minutes before)</string>
+    <string name="min30">30</string>
+    <string name="swipe">SWIPE</string>
+    <string name="clicking_registration_you_accept">Clicking \'Registration\' you accept</string>
+    <string name="terms_and_conditions"><u>terms and conditions</u></string>
+    <string name="profile_details">Profile Details</string>
+    <string name="business">Business</string>
+    <string name="privateRadioButton">Private</string>
+
+
+    <string-array name="spinnerList">
+        <item>Computer software </item>
+        <item>Conservative / Republican</item>
+        <item>Construction</item>
+        <item>Construction Service</item>
+        <item>Construction Unions</item>
+        <item>Credit Unions</item>
+        <item>Crop Production and Basic Processing</item>
+        <item>Cruise Lines</item>
+    </string-array>
+
+</resources>

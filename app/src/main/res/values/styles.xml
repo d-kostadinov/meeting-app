@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MyEditTextTheme">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">@color/colorBlack</item>
+        <item name="colorControlActivated">@color/colorDodgerblue</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
+
+    <style name="PickersTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorDodgerblue</item>
+        <item name="colorPrimaryDark">@color/colorDodgerblue</item>
+        <item name="colorAccent">@color/colorDodgerblue</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
+</resources>
