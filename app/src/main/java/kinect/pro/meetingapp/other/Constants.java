@@ -37,7 +37,8 @@ public class Constants {
 
     public static final String BASE_URL = "https://api.twilio.com/2010-04-01/";
     public static final String NUMBER_FROM = "+15756027049";
-    public static final int TYPE_DAY_VIEW = 1;
+    public static final int TYPE_DAY_VIEW_ONE_DAY = 1;
+    public static final int TYPE_DAY_VIEW_ONE_WEEK = 7;
 
     public static final int PLACE_PICKER_REQUEST = 1;
 

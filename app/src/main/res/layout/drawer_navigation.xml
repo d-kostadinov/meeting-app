@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/drawer"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="start"
+              android:background="@android:color/white"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <TextView
+        android:id="@+id/left_slider_menu_item1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/left_slider_menu_item1"
+        android:textColor="@color/text_color_1"
+        android:textSize="@dimen/left_slider_text_size"/>
+
+    <TextView
+        android:id="@+id/left_slider_menu_item2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/left_slider_menu_item2"
+        android:textColor="@color/text_color_1"
+        android:textSize="@dimen/left_slider_text_size"/>
+
+    <TextView
+        android:id="@+id/left_slider_menu_item3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/left_slider_menu_item3"
+        android:textColor="@color/text_color_1"
+        android:textSize="@dimen/left_slider_text_size"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@color/text_color_1"/>
+
+    <LinearLayout
+        android:id="@+id/left_slider_profile_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/avatar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/profile_details"
+            android:textColor="@color/text_color_1"
+            android:textSize="@dimen/left_slider_text_size"/>
+    </LinearLayout>
+
+</LinearLayout>
+

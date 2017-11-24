@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,7 +38,8 @@ import kinect.pro.meetingapp.model.MeetingModels;
 import kinect.pro.meetingapp.other.Utils;
 
 import static kinect.pro.meetingapp.other.Constants.KEY_INFO_EVENT;
-import static kinect.pro.meetingapp.other.Constants.TYPE_DAY_VIEW;
+import static kinect.pro.meetingapp.other.Constants.TYPE_DAY_VIEW_ONE_DAY;
+import static kinect.pro.meetingapp.other.Constants.TYPE_DAY_VIEW_ONE_WEEK;
 
 public class CalendarActivity extends AppCompatActivity implements MonthLoader.MonthChangeListener,
         WeekView.EventClickListener, DatabaseManager.OnDatabaseDataChanged {
@@ -53,6 +57,15 @@ public class CalendarActivity extends AppCompatActivity implements MonthLoader.M
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    @BindView(R.id.activity_main_drawer)
+    DrawerLayout mDrawer;
+
+    @BindView(R.id.ivDehaze)
+    View toolbarDrawerIcon;
+
+    @BindView(R.id.iv_app_name)
+    View toolbarAppNameView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +75,8 @@ public class CalendarActivity extends AppCompatActivity implements MonthLoader.M
 
         fab.setOnClickListener(view -> {
             if (isPermissionGranted())
-            startActivity(new Intent(CalendarActivity.this, CreateMeetingActivity.class)
-                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                startActivity(new Intent(CalendarActivity.this, CreateMeetingActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         });
         requestPermission();
     }
@@ -87,18 +100,71 @@ public class CalendarActivity extends AppCompatActivity implements MonthLoader.M
         initWeekView();
     }
 
-    private void initWeekView() {
+    @OnClick(R.id.ivDehaze)
+    void initWeekView() {
         weekView.setMonthChangeListener(this);
         weekView.setOnEventClickListener(this);
-        weekView.setNumberOfVisibleDays(TYPE_DAY_VIEW);
+
+        switchToOneDay();
+    }
+
+    @OnClick(R.id.left_slider_menu_item2)
+    void switchToOneDay() {
+        weekView.setNumberOfVisibleDays(TYPE_DAY_VIEW_ONE_DAY);
         weekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()));
         weekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
         weekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
+
+        closeLeftDrawer();
+    }
+
+    @OnClick(R.id.left_slider_menu_item3)
+    void switchToCalendar() {
+
+        weekView.setNumberOfVisibleDays(TYPE_DAY_VIEW_ONE_WEEK);
+        weekView.setColumnGap((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()));
+        weekView.setTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 6, getResources().getDisplayMetrics()));
+        weekView.setEventTextSize((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
+
+        closeLeftDrawer();
     }
 
     @OnClick(R.id.ivDehaze)
     public void onClickHome(View view) {
+
+        mDrawer.openDrawer(Gravity.LEFT);
+
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, mDrawer, 0, 0) {
+
+            public void onDrawerClosed(View view) {
+
+                toolbarDrawerIcon.setVisibility(View.VISIBLE);
+                toolbarAppNameView.setVisibility(View.GONE);
+
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView) {
+
+                toolbarDrawerIcon.setVisibility(View.GONE);
+                toolbarAppNameView.setVisibility(View.VISIBLE);
+
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        mDrawer.addDrawerListener(drawerToggle);
+    }
+
+    @OnClick(R.id.left_slider_profile_container)
+    public void onClickProfile(View view) {
         startActivity(new Intent(CalendarActivity.this, ProfileDetailsActivity.class));
+    }
+
+    private void closeLeftDrawer() {
+        if (mDrawer.isDrawerOpen(Gravity.LEFT)) {
+            mDrawer.closeDrawer(Gravity.LEFT);
+        }
     }
 
     //adding a meeting to the calendar
@@ -154,7 +220,7 @@ public class CalendarActivity extends AppCompatActivity implements MonthLoader.M
     }
 
 
-    private boolean isPermissionGranted(){
+    private boolean isPermissionGranted() {
         int permissionCheck = ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.READ_CONTACTS);
         return permissionCheck == PackageManager.PERMISSION_GRANTED;
@@ -175,6 +241,6 @@ public class CalendarActivity extends AppCompatActivity implements MonthLoader.M
 
     private void requestPermission() {
         ActivityCompat.requestPermissions(this,
-                new String[]{android.Manifest.permission.READ_CONTACTS},1);
+                new String[]{android.Manifest.permission.READ_CONTACTS}, 1);
     }
 }

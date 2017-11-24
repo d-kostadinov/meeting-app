@@ -1,58 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="kinect.pro.meetingapp.activity.CalendarActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/header"
+    <!-- The toolbar -->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_awesome_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_below="@+id/include"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/size_15"
-        android:text="@string/your_meeting"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/text_size_20" />
+        android:background="?attr/colorPrimary"
+        android:contentInsetEnd="0dp"
+        android:contentInsetLeft="0dp"
+        android:contentInsetRight="0dp"
+        android:contentInsetStart="0dp"
+        android:minHeight="?attr/actionBarSize"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
 
-    <com.alamkanak.weekview.WeekView
-        android:id="@+id/weekView"
+        <include
+            android:id="@+id/include"
+            layout="@layout/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/activity_main_drawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textView"
-        app:columnGap="8dp"
-        app:eventPadding="8dp"
-        app:dayBackgroundColor="#05000000"
-        app:eventTextColor="@android:color/black"
-        app:headerColumnBackground="#ffffffff"
-        app:headerColumnPadding="8dp"
-        app:headerColumnTextColor="#8f000000"
-        app:headerRowBackgroundColor="#ffefefef"
-        app:headerRowPadding="12dp"
-        app:hourHeight="60dp"
-        app:noOfVisibleDays="3"
-        app:textSize="12sp"
-        app:todayBackgroundColor="#1848adff" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_add_black_24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/size_20"
-        app:backgroundTint="@color/colorDodgerblue"
-        app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        tools:context="kinect.pro.meetingapp.activity.CalendarActivity">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/your_meeting"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_20"/>
+
+            <com.alamkanak.weekview.WeekView
+                android:id="@+id/weekView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView"
+                app:columnGap="8dp"
+                app:dayBackgroundColor="#05000000"
+                app:eventPadding="8dp"
+                app:eventTextColor="@android:color/black"
+                app:headerColumnBackground="#ffffffff"
+                app:headerColumnPadding="8dp"
+                app:headerColumnTextColor="#8f000000"
+                app:headerRowBackgroundColor="#ffefefef"
+                app:headerRowPadding="12dp"
+                app:hourHeight="60dp"
+                app:noOfVisibleDays="3"
+                app:textSize="12sp"
+                app:todayBackgroundColor="#1848adff"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/size_20"
+                app:backgroundTint="@color/colorDodgerblue"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                app:srcCompat="@drawable/ic_add_black_24dp"/>
+
+        </RelativeLayout>
+
+        <!-- The navigation drawer -->
+        <include layout="@layout/drawer_navigation"/>
+
+
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

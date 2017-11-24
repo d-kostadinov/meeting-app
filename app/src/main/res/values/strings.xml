@@ -33,6 +33,10 @@
     <string name="business">Business</string>
     <string name="privateRadioButton">Private</string>
 
+    <string name="left_slider_menu_item1">Chronological</string>
+    <string name="left_slider_menu_item2">Day</string>
+    <string name="left_slider_menu_item3">Month</string>
+
 
     <string-array name="spinnerList">
         <item>Computer software </item>
