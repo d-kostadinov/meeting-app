@@ -58,15 +58,19 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void attachFragment(int resId, Fragment fragment, String TAG) {
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(resId, fragment, TAG);
+        t.add(resId, fragment, TAG);
+        t.addToBackStack(TAG);
         t.commit();
     }
 
-    protected void attachFragment(int resId, Fragment fragment) {
-        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(resId, fragment, fragment.getClass().getSimpleName());
-        t.commit();
+    protected void showFragment(String tag){
+        getSupportFragmentManager().popBackStackImmediate(tag, 0);
     }
+
+    protected boolean isFragmentAttached(String tag){
+        return getSupportFragmentManager().findFragmentByTag(tag) != null;
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

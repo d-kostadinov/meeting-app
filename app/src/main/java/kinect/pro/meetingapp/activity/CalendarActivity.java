@@ -16,13 +16,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import kinect.pro.meetingapp.App;
 import kinect.pro.meetingapp.R;
 import kinect.pro.meetingapp.firebase.DatabaseManager;
 import kinect.pro.meetingapp.fragment.FraCalendar;
+import kinect.pro.meetingapp.fragment.FraMeetingsList;
 
 public class CalendarActivity extends BaseActivity implements DatabaseManager.OnDatabaseDataChanged {
 
@@ -38,6 +37,7 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
     View toolbarAppNameView;
 
     private FraCalendar fraCalendar;
+    private FraMeetingsList fraMeetings;
 
     @Override
     protected boolean isBackNavigationActivity() {
@@ -51,18 +51,12 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
 
         ((App) getApplication()).getAppComponent().inject(this);
 
-        fab.setOnClickListener(view -> {
-            if (isPermissionGranted())
-                startActivity(new Intent(CalendarActivity.this, CreateMeetingActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-        });
-
         fraCalendar = FraCalendar.newInstance();
-        attachFragment(R.id.act_main_container, fraCalendar, FraCalendar.class.getSimpleName());
+        attachFragment(R.id.act_main_container, fraCalendar, FraCalendar.TAG);
+
+        fraMeetings = FraMeetingsList.newInstance(getDatabaseManager().getMeetingModels());
 
         requestPermission();
-
-
     }
 
     @Override
@@ -92,8 +86,29 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
         databaseManager.initMeeting();
     }
 
+    @OnClick(R.id.fab)
+    void onCreateMeetingClicked(View view) {
+        if (isPermissionGranted())
+            startActivity(new Intent(CalendarActivity.this, CreateMeetingActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+    }
+
+    @OnClick(R.id.left_slider_menu_item1)
+    public void onChronologicalClicked() {
+
+        if (!isFragmentAttached(FraMeetingsList.TAG)) {
+            attachFragment(R.id.act_main_container, fraMeetings, FraMeetingsList.TAG);
+        } else {
+            showFragment(FraMeetingsList.TAG);
+        }
+
+        closeLeftDrawer();
+    }
+
     @OnClick(R.id.left_slider_menu_item2)
     void switchToOneDay() {
+
+        showFragment(FraCalendar.TAG);
         fraCalendar.switchToOneDay();
 
         closeLeftDrawer();
@@ -102,6 +117,7 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
     @OnClick(R.id.left_slider_menu_item3)
     void switchToCalendar() {
 
+        showFragment(FraCalendar.TAG);
         fraCalendar.switchToCalendar();
 
         closeLeftDrawer();
@@ -145,9 +161,6 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
         }
     }
 
-    //adding a meeting to the calendar
-
-
     @Override
     public void onDataChanged(DataSnapshot dataSnapshot) {
 
@@ -157,7 +170,6 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
 
     @Override
     public void onCancelled(DatabaseError error) {
-        //ignore
     }
 
 

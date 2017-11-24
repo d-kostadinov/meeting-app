@@ -38,6 +38,12 @@ import static kinect.pro.meetingapp.other.Constants.TYPE_DAY_VIEW_ONE_WEEK;
 public class FraCalendar extends Fragment implements MonthLoader.MonthChangeListener,
         WeekView.EventClickListener {
 
+    public static final String TAG = FraCalendar.class.getSimpleName();
+
+    public static FraCalendar newInstance() {
+        return new FraCalendar();
+    }
+
     @BindView(R.id.weekView)
     WeekView weekView;
 
@@ -147,7 +153,4 @@ public class FraCalendar extends Fragment implements MonthLoader.MonthChangeList
         startActivity(new Intent(getActivity(), InfoMeetingActivity.class));
     }
 
-    public static FraCalendar newInstance() {
-        return new FraCalendar();
-    }
 }
