@@ -6,7 +6,7 @@
     <string name="validation_Code">Validation Code</string>
     <string name="submit">Submit</string>
     <string name="create_meeting">Create meeting</string>
-    <string name="your_meeting">Your meeting</string>
+    <string name="your_meeting">Your meetings</string>
     <string name="meeting_topic">Meeting topic</string>
     <string name="add_contacts">Enter contacts separated by commas and spaces</string>
     <string name="date_time">Date &amp; Time</string>
@@ -36,6 +36,7 @@
     <string name="left_slider_menu_item1">Chronological</string>
     <string name="left_slider_menu_item2">Day</string>
     <string name="left_slider_menu_item3">Month</string>
+    <string name="day_info">Meeting info</string>
 
 
     <string-array name="spinnerList">

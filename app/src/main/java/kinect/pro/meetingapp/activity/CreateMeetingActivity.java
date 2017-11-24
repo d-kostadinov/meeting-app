@@ -66,7 +66,7 @@ import static kinect.pro.meetingapp.other.Constants.PLACE_PICKER_REQUEST;
 import static kinect.pro.meetingapp.popup.PopupAlarmManager.scheduleNotification;
 
 
-public class CreateMeetingActivity extends AppCompatActivity
+public class CreateMeetingActivity extends BaseActivity
         implements DatePickerCallback, TimePickerCallback,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener,
         DatabaseManager.OnDatabaseDataChanged {
@@ -116,9 +116,13 @@ public class CreateMeetingActivity extends AppCompatActivity
     }
 
     @Override
+    protected boolean isBackNavigationActivity() {
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         ((App) getApplication()).getAppComponent().inject(this);
         ButterKnife.bind(this);
         verificationInternet();
@@ -127,6 +131,16 @@ public class CreateMeetingActivity extends AppCompatActivity
         initViewAndLists();
         databaseManager.saveCurrentUserDetails();
         databaseManager.subscribeToContactsUpdates(this);
+    }
+
+    @Override
+    protected int getActivityLayout() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected String getScreenTitle() {
+        return getString(R.string.create_meeting);
     }
 
     @Override
@@ -191,20 +205,19 @@ public class CreateMeetingActivity extends AppCompatActivity
         return false;
     }
 
-    public void initContactsList(){
+    public void initContactsList() {
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds
-                .Phone.CONTENT_URI, null,null,null, null);
-        try{
-            while (phones.moveToNext())
-            {
+                .Phone.CONTENT_URI, null, null, null, null);
+        try {
+            while (phones.moveToNext()) {
                 mListContactsPhone.add(new Contact(phones.getString(phones
                         .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
                         phones.getString(phones
-                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
             }
             phones.close();
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         mAdapterContacts.notifyDataSetChanged();
@@ -256,41 +269,41 @@ public class CreateMeetingActivity extends AppCompatActivity
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            if (resultCode == RESULT_OK) {
-                switch (requestCode) {
-                    case CONTACT_PICKER_RESULT: {
-                        Uri contactUri =
-                                data.getData();
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case CONTACT_PICKER_RESULT: {
+                    Uri contactUri =
+                            data.getData();
 
-                        String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
+                    String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
 
-                        Cursor cursor = getContentResolver()
-                                .query(contactUri, projection, null,
-                                        null, null);
-                        cursor.moveToFirst();
+                    Cursor cursor = getContentResolver()
+                            .query(contactUri, projection, null,
+                                    null, null);
+                    cursor.moveToFirst();
 
-                        int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                        String number = cursor.getString(column);
+                    int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    String number = cursor.getString(column);
 
-                        Log.d(TAG, number);
+                    Log.d(TAG, number);
 
-                        cursor.close();
+                    cursor.close();
 
-                        etContacts.append(number.replace(" ", "") + ", ");
+                    etContacts.append(number.replace(" ", "") + ", ");
 
-                        break;
-                    }
-                    case PLACE_PICKER_REQUEST: {
-                        Place place = PlacePicker.getPlace(data, this);
-                        etLocation.setText(place.getAddress());
-                        mLatitude = (float) place.getLatLng().latitude;
-                        mLongitude = (float) place.getLatLng().longitude;
-                        break;
-                    }
+                    break;
                 }
-        } else {
-                Log.d(TAG, "fgfg");
+                case PLACE_PICKER_REQUEST: {
+                    Place place = PlacePicker.getPlace(data, this);
+                    etLocation.setText(place.getAddress());
+                    mLatitude = (float) place.getLatLng().latitude;
+                    mLongitude = (float) place.getLatLng().longitude;
+                    break;
+                }
             }
+        } else {
+            Log.d(TAG, "fgfg");
+        }
     }
 
     private void showDatePickerFragment(long minDate) {
@@ -406,7 +419,6 @@ public class CreateMeetingActivity extends AppCompatActivity
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         Toast.makeText(this, "Meeting create!", Toast.LENGTH_SHORT).show();
     }
-
 
 
     @OnClick(R.id.btnCancel)

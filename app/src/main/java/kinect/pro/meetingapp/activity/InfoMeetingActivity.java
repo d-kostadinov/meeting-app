@@ -44,12 +44,9 @@ import static kinect.pro.meetingapp.other.Constants.STATUS_CONFIDMED;
 import static kinect.pro.meetingapp.other.Constants.URL_MEETING;
 import static kinect.pro.meetingapp.popup.PopupAlarmManager.scheduleNotification;
 
-public class InfoMeetingActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class InfoMeetingActivity extends BaseActivity implements OnMapReadyCallback {
 
     public static final String TAG = "InfoMeetingActivity ->";
-
-    @Inject
-    SharedPreferences sharedPreferences;
 
     @BindView(R.id.tvMeetingTopic)
     TextView tvMeetingTopic;
@@ -73,9 +70,15 @@ public class InfoMeetingActivity extends AppCompatActivity implements OnMapReady
     private String mMyPhoneNumber;
 
     @Override
+    protected boolean isBackNavigationActivity() {
+        return true;
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_meeting);
+
         ButterKnife.bind(this);
         ((App) getApplication()).getAppComponent().inject(this);
         mDatabase = FirebaseDatabase.getInstance();
@@ -89,6 +92,16 @@ public class InfoMeetingActivity extends AppCompatActivity implements OnMapReady
         initFirebase(sharedPreferences.getString(KEY_INFO_EVENT, null));
 
         mMyPhoneNumber = sharedPreferences.getString(KEY_PHONE, DEFAULT);
+    }
+
+    @Override
+    protected int getActivityLayout() {
+        return R.layout.activity_info_meeting;
+    }
+
+    @Override
+    protected String getScreenTitle() {
+        return getString(R.string.day_info);
     }
 
     private void initFirebase(String event) {

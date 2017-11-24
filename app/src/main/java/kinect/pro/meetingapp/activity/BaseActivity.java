@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -27,6 +29,9 @@ import kinect.pro.meetingapp.firebase.DatabaseManager;
 public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract boolean isBackNavigationActivity();
+    protected abstract int getActivityLayout();
+    protected abstract String getScreenTitle();
+
 
     @Inject
     protected DatabaseManager databaseManager;
@@ -39,6 +44,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @BindView(R.id.navigation_back)
     View backNavigationView;
+
+    @BindView(R.id.header_title)
+    TextView headerTitle;
 
     @OnClick(R.id.navigation_back)
     void onBack() {
@@ -72,9 +80,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             backNavigationView.setVisibility(View.VISIBLE);
             toolbarDrawerIcon.setVisibility(View.GONE);
         }
+
+        if(!TextUtils.isEmpty(getScreenTitle())){
+            headerTitle.setVisibility(View.VISIBLE);
+            headerTitle.setText(getScreenTitle());
+        }
     }
 
-    protected abstract int getActivityLayout();
 
 
     public DatabaseManager getDatabaseManager() {

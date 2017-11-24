@@ -71,6 +71,11 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
     }
 
     @Override
+    protected String getScreenTitle() {
+        return null;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         databaseManager.setDatabaseManagerListener(this);
