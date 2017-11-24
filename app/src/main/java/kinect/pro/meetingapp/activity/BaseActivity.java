@@ -1,26 +1,49 @@
 package kinect.pro.meetingapp.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
+import android.view.View;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
+import kinect.pro.meetingapp.App;
+import kinect.pro.meetingapp.R;
 import kinect.pro.meetingapp.firebase.DatabaseManager;
 
 /**
  * Created by dobrikostadinov on 11/24/17.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
+
+    protected abstract boolean isBackNavigationActivity();
 
     @Inject
     protected DatabaseManager databaseManager;
 
     @Inject
     SharedPreferences sharedPreferences;
+
+    @BindView(R.id.ivDehaze)
+    View toolbarDrawerIcon;
+
+    @BindView(R.id.navigation_back)
+    View backNavigationView;
+
+    @OnClick(R.id.navigation_back)
+    void onBack() {
+        finish();
+    }
 
     protected Unbinder unBinder;
 
@@ -36,6 +59,23 @@ public class BaseActivity extends AppCompatActivity {
         t.replace(resId, fragment, fragment.getClass().getSimpleName());
         t.commit();
     }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(getActivityLayout());
+
+        unBinder = ButterKnife.bind(this);
+
+        if (isBackNavigationActivity()) {
+            backNavigationView.setVisibility(View.VISIBLE);
+            toolbarDrawerIcon.setVisibility(View.GONE);
+        }
+    }
+
+    protected abstract int getActivityLayout();
+
 
     public DatabaseManager getDatabaseManager() {
         return databaseManager;

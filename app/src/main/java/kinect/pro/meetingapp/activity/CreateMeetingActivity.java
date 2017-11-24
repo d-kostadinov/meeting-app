@@ -437,11 +437,6 @@ public class CreateMeetingActivity extends AppCompatActivity
         }
     }
 
-    @OnClick(R.id.ivHome)
-    public void onClickHome(View view) {
-        finish();
-    }
-
     @Override
     public void onDateSet(long date) {
     }

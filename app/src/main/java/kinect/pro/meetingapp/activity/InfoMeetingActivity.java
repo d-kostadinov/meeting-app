@@ -132,12 +132,12 @@ public class InfoMeetingActivity extends AppCompatActivity implements OnMapReady
         initBtnBottom(meetingModels);
     }
 
-    public void initBtnBottom(MeetingModels meetingModels){
+    public void initBtnBottom(MeetingModels meetingModels) {
         for (int i = 0; i < meetingModels.getParticipants().size(); i++) {
             if (meetingModels.getParticipants().get(i).getMember()
-                    .equals(mMyPhoneNumber)){
+                    .equals(mMyPhoneNumber)) {
                 if (!meetingModels.getParticipants().get(i).getStatus().equals(Constants.STATUS_PENDING)) {
-                   linearLayoutBtn.setVisibility(View.GONE);
+                    linearLayoutBtn.setVisibility(View.GONE);
                 }
             }
         }
@@ -192,11 +192,6 @@ public class InfoMeetingActivity extends AppCompatActivity implements OnMapReady
             String scheduledAt = meetingModels.getTopic() + "\n at -" + timeString;
             scheduleNotification(context, scheduledAt, nameMeeting, meetingModels.getDate(), Integer.parseInt(meetingModels.getReminder()));
         }
-    }
-
-    @OnClick(R.id.ivHome)
-    public void onClickHome(View view) {
-        onBackPressed();
     }
 }
 

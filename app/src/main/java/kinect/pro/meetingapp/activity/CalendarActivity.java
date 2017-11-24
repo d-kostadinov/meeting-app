@@ -34,19 +34,21 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
     @BindView(R.id.activity_main_drawer)
     DrawerLayout mDrawer;
 
-    @BindView(R.id.ivDehaze)
-    View toolbarDrawerIcon;
-
     @BindView(R.id.iv_app_name)
     View toolbarAppNameView;
 
     private FraCalendar fraCalendar;
 
     @Override
+    protected boolean isBackNavigationActivity() {
+
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        unBinder =  ButterKnife.bind(this);
+
         ((App) getApplication()).getAppComponent().inject(this);
 
         fab.setOnClickListener(view -> {
@@ -59,6 +61,13 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
         attachFragment(R.id.act_main_container, fraCalendar, FraCalendar.class.getSimpleName());
 
         requestPermission();
+
+
+    }
+
+    @Override
+    protected int getActivityLayout() {
+        return R.layout.activity_calendar;
     }
 
     @Override
