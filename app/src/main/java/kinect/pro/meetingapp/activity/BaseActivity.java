@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     @Inject
     SharedPreferences sharedPreferences;
 
-    private Unbinder unBinder;
+    protected Unbinder unBinder;
 
 
     protected void attachFragment(int resId, Fragment fragment, String TAG) {
