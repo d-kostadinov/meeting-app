@@ -4,6 +4,7 @@ package kinect.pro.meetingapp.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import kinect.pro.meetingapp.activity.ActivityContacts;
 import kinect.pro.meetingapp.activity.CalendarActivity;
 import kinect.pro.meetingapp.activity.CreateMeetingActivity;
 import kinect.pro.meetingapp.activity.InfoMeetingActivity;
@@ -27,4 +28,6 @@ public interface AppComponent {
     void inject(PopupReceiver receiver);
 
     void inject(ProfileDetailsActivity activity);
+
+    void inject(ActivityContacts activity);
 }

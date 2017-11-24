@@ -196,4 +196,11 @@ public class CalendarActivity extends BaseActivity implements DatabaseManager.On
         ActivityCompat.requestPermissions(this,
                 new String[]{android.Manifest.permission.READ_CONTACTS}, 1);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+
+    }
+
 }

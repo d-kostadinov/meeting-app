@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -57,6 +58,7 @@ import kinect.pro.meetingapp.other.Constants;
 import kinect.pro.meetingapp.other.ContactsAdapter;
 import kinect.pro.meetingapp.other.Utils;
 import kinect.pro.meetingapp.rest.RestController;
+import kinect.pro.meetingapp.util.ContactsManager;
 
 import static java.util.Locale.ENGLISH;
 import static kinect.pro.meetingapp.other.Constants.DATE_FORMAT;
@@ -131,6 +133,8 @@ public class CreateMeetingActivity extends BaseActivity
         initViewAndLists();
         databaseManager.saveCurrentUserDetails();
         databaseManager.subscribeToContactsUpdates(this);
+
+        ContactsManager.getInstance(this).getAllScheduledContacts().clear();
     }
 
     @Override
@@ -169,7 +173,6 @@ public class CreateMeetingActivity extends BaseActivity
         etContacts.setAdapter(mAdapterContacts);
         etContacts.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
 
-        initContactsList();
     }
 
     private boolean createGroupContacts() {
@@ -205,32 +208,6 @@ public class CreateMeetingActivity extends BaseActivity
         return false;
     }
 
-    public void initContactsList() {
-
-        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds
-                .Phone.CONTENT_URI, null, null, null, null);
-        try {
-            while (phones.moveToNext()) {
-                mListContactsPhone.add(new Contact(phones.getString(phones
-                        .getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
-                        phones.getString(phones
-                                .getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
-            }
-            phones.close();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        mAdapterContacts.notifyDataSetChanged();
-    }
-
-    public void createListContacts() {
-//        mListContactsPhone.clear();
-//        for (int i = 0; i < mListContactsModels.size(); i++) {
-//            if (!mListContactsModels.get(i).getPhone().equals(sharedPreferences.getString(KEY_PHONE, DEFAULT)))
-//                mListContactsPhone.add(mListContactsModels.get(i).getPhone());
-//        }
-//        mAdapterContacts.notifyDataSetChanged();
-    }
 
     @OnFocusChange(R.id.etLocation)
     public void onClickLocation(View view, boolean isFocused) {
@@ -260,11 +237,9 @@ public class CreateMeetingActivity extends BaseActivity
 
     @OnClick(R.id.peekContacts)
     public void onClickPeekContacts(View view) {
-        Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-        startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);
-        etContacts.requestFocus();
-        etContacts.setSelection(etContacts.getText().length());
+
+        Intent intent = new Intent(this, ActivityContacts.class);
+        startActivityForResult(intent, CONTACT_PICKER_RESULT);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -272,24 +247,15 @@ public class CreateMeetingActivity extends BaseActivity
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case CONTACT_PICKER_RESULT: {
-                    Uri contactUri =
-                            data.getData();
 
-                    String[] projection = {ContactsContract.CommonDataKinds.Phone.NUMBER};
+                    List<Contact> scheduledContacts = ContactsManager.getInstance(CreateMeetingActivity.this).getAllScheduledContacts();
 
-                    Cursor cursor = getContentResolver()
-                            .query(contactUri, projection, null,
-                                    null, null);
-                    cursor.moveToFirst();
+                    etContacts.setText("");
 
-                    int column = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-                    String number = cursor.getString(column);
+                    for(int i = 0; i < scheduledContacts.size(); i++){
+                        etContacts.append(scheduledContacts.get(i).getPhone().replace(" ", "") + ", ");
+                    }
 
-                    Log.d(TAG, number);
-
-                    cursor.close();
-
-                    etContacts.append(number.replace(" ", "") + ", ");
 
                     break;
                 }

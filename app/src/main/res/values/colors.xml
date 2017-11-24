@@ -20,4 +20,12 @@
     <color name="colorDarksalmon">#ea9999</color>
 
     <color name="text_color_1">#37474f</color>
+
+    <color name="list_item_contact_text">#404040</color>
+
+    <color name="list_item_contact_delimiter">#f2f2f2</color>
+
+    <drawable name="contact_select">#ffc110</drawable>
+    <drawable name="contact_default">#bbbbbb</drawable>
+
 </resources>

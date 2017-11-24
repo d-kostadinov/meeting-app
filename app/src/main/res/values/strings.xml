@@ -38,6 +38,9 @@
     <string name="left_slider_menu_item3">Month</string>
     <string name="day_info">Meeting info</string>
 
+    <string name="compose_choose_contact">Choose contact</string>
+    <string name="compose_search_contacts">Search contact</string>
+    <string name="done">Done</string>
 
     <string-array name="spinnerList">
         <item>Computer software </item>

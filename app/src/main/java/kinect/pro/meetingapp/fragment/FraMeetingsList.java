@@ -1,6 +1,7 @@
 package kinect.pro.meetingapp.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import kinect.pro.meetingapp.R;
@@ -53,8 +56,18 @@ public class FraMeetingsList extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        Collections.sort(data, new DateComparator());
 
         MeetingsAdapter mAdapter = new MeetingsAdapter(data);
         mRecyclerView.setAdapter(mAdapter);
     }
+
+    private class DateComparator implements Comparator<MeetingModels> {
+        @Override
+        public int compare(MeetingModels t0, MeetingModels t1) {
+
+            return Long.valueOf(t1.getDate()).compareTo(t0.getDate());
+        }
+    }
+
 }

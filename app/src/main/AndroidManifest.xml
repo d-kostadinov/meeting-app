@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kinect.pro.meetingapp">
+          package="kinect.pro.meetingapp">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
@@ -18,38 +18,41 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"/>
 
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.CreateMeetingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.CalendarActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.ActivityContacts"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.InfoMeetingActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activity.PopupActivity" />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PopupActivity"/>
 
         <receiver android:name=".popup.PopupReceiver">
             <intent-filter>
-                <action android:name="kinect.pro.meetingapp.POPUP_ACTION" />
+                <action android:name="kinect.pro.meetingapp.POPUP_ACTION"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.TermsAndCondActivity" />
+        <activity android:name=".activity.TermsAndCondActivity"/>
         <activity android:name=".activity.ProfileDetailsActivity"></activity>
     </application>
 
