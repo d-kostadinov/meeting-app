@@ -51,24 +51,14 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_size_20"/>
 
-            <com.alamkanak.weekview.WeekView
-                android:id="@+id/weekView"
+            <FrameLayout
+                android:id="@+id/act_main_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/textView"
-                app:columnGap="8dp"
-                app:dayBackgroundColor="#05000000"
-                app:eventPadding="8dp"
-                app:eventTextColor="@android:color/black"
-                app:headerColumnBackground="#ffffffff"
-                app:headerColumnPadding="8dp"
-                app:headerColumnTextColor="#8f000000"
-                app:headerRowBackgroundColor="#ffefefef"
-                app:headerRowPadding="12dp"
-                app:hourHeight="60dp"
-                app:noOfVisibleDays="3"
-                app:textSize="12sp"
-                app:todayBackgroundColor="#1848adff"/>
+                android:layout_below="@+id/textView">
+
+
+            </FrameLayout>
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
